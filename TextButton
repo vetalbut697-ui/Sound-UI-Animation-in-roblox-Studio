@@ -1,0 +1,14 @@
+local button = script.Parent
+
+button.MouseButton1Click:Connect(function()-- коли клікають по кнопці
+	print('Hello world!')
+end)
+
+local button = script.Parent
+
+button.MouseEnter:Connect(function()-- коли курсор наведений на кнопку
+	button.BackgroundColor3 = Color3.new(0.266667, 1, 0)
+end)
+button.MouseLeave:Connect(function()-- коли курсор ненаведений на кнопку
+	button.BackgroundColor3 = Color3.new(1, 1, 1)
+end)
