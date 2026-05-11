@@ -1,0 +1,28 @@
+--Среверний скрипт
+local remote = game.ReplicatedStorage:WaitForChild("SoundEffect")
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		local sound = Instance.new("Sound")-- Створення самого об'єкту 
+		sound.Name = 'sound'-- назва
+		sound.SoundId = "rbxassetid://81257191453364" -- ВАЖЛИВО! це roblox ID звуку, це тільки цифри, ID різних звуків можна знайти в інтеренеті
+		sound.Volume = 3      -- Гучність (від 0 до 10)
+		sound.Looped = true     -- Чи буде звук повторюватися
+		sound.Parent = character.Head-- де буде знаходиттись об'єкт звуку
+	end)
+end)
+
+remote.OnServerEvent:Connect(function(player)
+	local sound = player.Character.Head.sound
+	sound:Play()--запуск звуку
+	task.wait(3)
+	sound:Stop()--зупинка звуку
+end)
+
+-- Локальний скрипт
+local button = workspace:WaitForChild("Part")
+local click = button:WaitForChild("ClickDetector")
+local remote = game.ReplicatedStorage:WaitForChild("SoundEffect")
+
+click.MouseClick:Connect(function()
+	remote:FireServer()
+end)
