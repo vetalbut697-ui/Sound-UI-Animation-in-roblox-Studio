@@ -1,0 +1,26 @@
+local TS = game:GetService("TweenService")--Підключення інструменту для створення анімації
+local menu = script.Parent 
+local cut = menu:WaitForChild("UICorner") -- Використовуємо WaitForChild для безпеки
+
+local info = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0) -- Налаштування самої анімації, напрямок, час і тд
+
+-- Початкові стани
+menu.BackgroundTransparency = 1
+cut.CornerRadius = UDim.new(0, 20) -- Починаємо з великого закруглення
+menu.Visible = true
+
+-- Налаштовуємо цілі (Goal)
+-- ВАЖЛИВО: TweenService може анімувати властивості лише ОДНОГО об'єкта за раз.
+-- Тому для menu та для cut потрібні окремі твіни.
+local menuGoal = {BackgroundTransparency = 0}
+local cornerGoal = {CornerRadius = UDim.new(0, 0)} -- Прибираємо закруглення до нуля
+
+local menuFade = TS:Create(menu, info, menuGoal)-- Анімація появи для Фрейму
+local cornerSharp = TS:Create(cut, info, cornerGoal)-- Анімація закруглення
+
+task.wait(3)
+
+-- Запускаємо обидві анімації
+menuFade:Play()
+task.wait(1)
+cornerSharp:Play()
